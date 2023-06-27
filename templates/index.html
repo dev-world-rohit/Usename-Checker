@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Social Media Checker</title>
+        <style>
+            body {
+                background-color: #000000;
+                color: white;
+                padding: 0 10%;
+            }
+
+            .input-text {
+                width: 96%;
+                padding: 10px 5px;
+                border: 2px solid white;
+                border-radius: 2px;
+            }
+
+            button {
+                margin-top: 30px;
+                width: 20%;
+                padding: 10px 5%;
+                border: 2px solid rgba(255, 29, 29, 0.741);
+                border-radius: 1px;
+                background: transparent;
+                color: rgba(255, 29, 29, 0.741);
+                box-shadow: 0 0 10px #ff4520;
+                transition: background-color 0.3s, color 0.3s;
+            }
+
+            button:hover {
+                background-color: rgba(255, 29, 29, 0.741);
+                color: white;
+            }
+
+            button:active {
+                background-color: #ff4520;
+                color: white;
+                box-shadow: 0 0 5px #ff4520;
+            }
+
+            .input-container {
+                background-color: #15014d6f;
+                width: 90%;
+                margin: 0;
+                padding: 40px 50px;
+                text-align: center;
+            }
+
+            .socialmedia-container {
+                background-color: #15014d6f;
+                width: 90%;
+                margin-top: 20px;
+                padding: 40px 50px;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: flex-start;
+            }
+
+            .card {
+                width: 250px;
+                background: rgba(0, 18, 120, 0.575);
+                border-radius: 16px;
+                box-shadow: 0 0 10px #fafafa;
+                margin: 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
+            }
+
+            .image-div {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            img {
+                width: 70px;
+            }
+
+            h4 {
+                margin: 10px 0 0;
+            }
+
+            .card-availability-div {
+                margin-top: auto;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <div class="input-container">
+                <form id="inputForm" method="post">
+                    <input
+                        type="text"
+                        name="username"
+                        class="input-text"
+                        placeholder="Enter the username"
+                    />
+                    <button type="submit">Check</button>
+                </form>
+            </div>
+            <div id="socialmedia-container" class="socialmedia-container">
+                {% for item in items %}
+                <div class="card">
+                    <div class="image-div">
+                        <img
+                            src="{{ url_for('static', filename='logos/' + item['title'] + '.png') }}"
+                            alt="img"
+                        />
+                    </div>
+                    <div class="card-text-div">
+                        <h4>{{ item['title'] }}</h4>
+                    </div>
+                    <div class="card-availability-div">
+                        <p>{{ item['websiteExists'] or '' }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </body>
+</html>
